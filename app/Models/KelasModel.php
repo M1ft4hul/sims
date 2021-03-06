@@ -16,4 +16,13 @@ class KelasModel extends Model
 	protected $returnType     = 'array';
 	protected $useSoftDeletes = false;
 	protected $allowedFields  = ['kelas'];
+
+	public function getDetailKelas($kelas = false)
+	{
+		if ($kelas == false) {
+			return $this->findAll();
+		}
+
+		return $this->where(['kelas' => $kelas])->first();
+	}
 }

@@ -65,13 +65,44 @@ class Kelas extends BaseController
         }
     }
 
-    public function editkelas($kelas)
+    public function editform($kelas)
     {
         $data = [
-            'title' => 'SIMS | Edit Data Kelas',
-            'validation' => \Config\Services::validation(),
+            'title' => 'SIMS | Edit Kelas',
+            'validation' =>  \Config\Services::validation(),
             'kelas' => $this->kelasku->getDetailKelas($kelas)
         ];
         return view('editkelas', $data);
+    }
+
+    public function update($kelas)
+    {
+
+        if (!$this->validate([
+            'kelas' => [
+                'rules' => 'required|is_unique[tb_kelas.kelas,id,{id}]',
+                'errors' => [
+                    'required' => '{field} tidak boleh dikosongkan',
+                    'is_unique' =>  'Data Kelas Sudah Ada'
+                ]
+            ]
+        ])) {
+            $validation = \Config\Services::validation();
+            return redirect()->to('/formEdit/Kelas/' . $this->request->getVar('kelas_sch'))->withInput()->with('validation', $validation);
+        }
+
+        $this->kelasku->save([
+            'id' => $kelas,
+            'kelas' => $this->request->getVar('kelas')
+        ]);
+        session()->setFlashdata('sukses', 'Data Berhasil Di Ubah');
+        return $this->response->redirect('/kelasIndex');
+    }
+
+    public function delete($id)
+    {
+        $this->kelasku->delete($id);
+        session()->setFlashdata('sukses', 'Data terhapus!');
+        return redirect()->to('/kelasIndex');
     }
 }

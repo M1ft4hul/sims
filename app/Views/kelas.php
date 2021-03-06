@@ -151,15 +151,15 @@
                                             <td><?= $a++ ?></td>
                                             <td>
                                                 <h2 class="table-avatar">
-                                                    <?= $k['kelas'];?>
+                                                    <?= $k['kelas']; ?>
                                                 </h2>
                                             </td>
                                             <td class="text-right">
                                                 <div class="actions">
-                                                    <a href="/EditForm/Kelas/<?= $k['kelas'];?>" class="btn btn-sm bg-success-light mr-2">
+                                                    <a href="/formEdit/Kelas/<?= $k['kelas']; ?>" class="btn btn-sm bg-success-light mr-2">
                                                         <i class="fas fa-pen"></i>
                                                     </a>
-                                                    <form action="" class="d-inline" method="POST">
+                                                    <form action="/kelasHapus/<?= $k['id']; ?>" class="d-inline" method="POST">
                                                         <?= csrf_field(); ?>
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <button type="submit" class="btn btn-sm bg-danger-light "> <i class="fas fa-trash"></i></button>

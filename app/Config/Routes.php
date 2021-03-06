@@ -51,7 +51,8 @@ $routes->delete('/mapelDelete/(:num)', 'Mapel::delete/$1');
 $routes->get('/kelasIndex', 'Kelas::index');
 $routes->get('/formKelas', 'Kelas::formadd');
 $routes->post('/logicTambah', 'Kelas::save');
-$routes->get('/EditForm/Kelas/(:segment)', 'Kelas::editkelas/$1');
+$routes->get('/formEdit/Kelas/(:segment)', 'Kelas::editform/$1');
+$routes->delete('/kelasHapus/(:num)', 'Kelas::delete/$1');
 // deklarasikan 
 /**
  * --------------------------------------------------------------------
